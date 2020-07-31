@@ -15,6 +15,10 @@
 		CC29345024D4A4860075AB29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC29344E24D4A4860075AB29 /* LaunchScreen.storyboard */; };
 		CC29345B24D4A4860075AB29 /* Popular_MoviesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29345A24D4A4860075AB29 /* Popular_MoviesTests.swift */; };
 		CC901DF924D4A76900DD2BDE /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = CC901DF824D4A76900DD2BDE /* Readme.md */; };
+		CC901DFC24D4AAB600DD2BDE /* PopularMoviesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC901DFB24D4AAB600DD2BDE /* PopularMoviesList.swift */; };
+		CC901DFE24D4ACF500DD2BDE /* PopularMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC901DFD24D4ACF500DD2BDE /* PopularMovie.swift */; };
+		CC901E0024D4ADB100DD2BDE /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC901DFF24D4ADB100DD2BDE /* Movie.swift */; };
+		CC901E0224D4B55200DD2BDE /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC901E0124D4B55200DD2BDE /* Genre.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +44,10 @@
 		CC29345A24D4A4860075AB29 /* Popular_MoviesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popular_MoviesTests.swift; sourceTree = "<group>"; };
 		CC29345C24D4A4860075AB29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CC901DF824D4A76900DD2BDE /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
+		CC901DFB24D4AAB600DD2BDE /* PopularMoviesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesList.swift; sourceTree = "<group>"; };
+		CC901DFD24D4ACF500DD2BDE /* PopularMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMovie.swift; sourceTree = "<group>"; };
+		CC901DFF24D4ADB100DD2BDE /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		CC901E0124D4B55200DD2BDE /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,9 +90,10 @@
 		CC29343F24D4A4840075AB29 /* Popular Movies */ = {
 			isa = PBXGroup;
 			children = (
-				CC29346924D4A6B70075AB29 /* Extensions */,
-				CC29346824D4A6B20075AB29 /* Views */,
 				CC29346724D4A6AA0075AB29 /* Screens */,
+				CC29346824D4A6B20075AB29 /* Views */,
+				CC901DFA24D4A98F00DD2BDE /* Models */,
+				CC29346924D4A6B70075AB29 /* Extensions */,
 				CC29346624D4A66C0075AB29 /* Local Storage */,
 				CC29346524D4A65E0075AB29 /* App */,
 				CC29345124D4A4860075AB29 /* Info.plist */,
@@ -140,6 +149,17 @@
 			children = (
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		CC901DFA24D4A98F00DD2BDE /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CC901DFB24D4AAB600DD2BDE /* PopularMoviesList.swift */,
+				CC901DFD24D4ACF500DD2BDE /* PopularMovie.swift */,
+				CC901DFF24D4ADB100DD2BDE /* Movie.swift */,
+				CC901E0124D4B55200DD2BDE /* Genre.swift */,
+			);
+			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -243,10 +263,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CC901E0024D4ADB100DD2BDE /* Movie.swift in Sources */,
+				CC901DFC24D4AAB600DD2BDE /* PopularMoviesList.swift in Sources */,
 				CC29344624D4A4840075AB29 /* Popular_Movies.xcdatamodeld in Sources */,
+				CC901DFE24D4ACF500DD2BDE /* PopularMovie.swift in Sources */,
 				CC29344124D4A4840075AB29 /* AppDelegate.swift in Sources */,
 				CC29344824D4A4840075AB29 /* PopularMoviesListScreen.swift in Sources */,
 				CC29344324D4A4840075AB29 /* SceneDelegate.swift in Sources */,
+				CC901E0224D4B55200DD2BDE /* Genre.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
