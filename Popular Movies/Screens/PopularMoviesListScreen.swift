@@ -11,6 +11,11 @@ import SwiftUI
 struct PopularMoviesListScreen: View {
     var body: some View {
         Text("Hello, World!")
+            .onAppear {
+                NetworkManager.shared.fetchPopularMovies { (response: Result<[PopularMovie], CustomError>) in
+                    dump(response)
+                }
+            }
     }
 }
 

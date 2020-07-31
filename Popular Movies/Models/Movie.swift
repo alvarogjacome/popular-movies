@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Movie {
+struct Movie: Decodable {
     let adult: Bool
     let backdropPath: String?
     let budget: Int
