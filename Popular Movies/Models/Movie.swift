@@ -25,5 +25,6 @@ struct Movie: Decodable {
     let status: String
     let tagline: String
     let title: String
+    let voteAverage: Double
     let voteCount: Int
 }

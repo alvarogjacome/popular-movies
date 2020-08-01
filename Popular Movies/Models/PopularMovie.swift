@@ -10,6 +10,7 @@ import Foundation
 
 struct PopularMovie: Decodable, Identifiable {
     let adult: Bool
+    let backdropPath: String?
     let genreIds: [Int]
     let id: Int
     let originalLanguage: String

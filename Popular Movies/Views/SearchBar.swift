@@ -33,6 +33,7 @@ struct SearchBar: View {
                         .padding(.horizontal, 8)
                 }
             }
+            .animation(.spring())
             .padding(5)
             .foregroundColor(.secondary)
             .background(Color(.secondarySystemBackground))
@@ -43,8 +44,7 @@ struct SearchBar: View {
         .frame(width: UIScreen.main.bounds.width)
         .background(Color("MainBlue")
             .edgesIgnoringSafeArea(.top))
-        .padding(.bottom, 3)
+        .padding(.bottom, 4)
         .background(LinearGradient(gradient: Gradient(colors: [Color("LightGreen"), Color("LightBlue")]), startPoint: .leading, endPoint: .trailing))
-        .animation(.spring())
     }
 }

@@ -17,6 +17,12 @@ struct PopularMoviesListScreen: View {
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = UIColor(named: "MainBlue")
         appearance.shadowColor = .clear
+
+        appearance.titleTextAttributes = [
+            .font: UIFont.systemFont(ofSize: 22, weight: .thin),
+            NSAttributedString.Key.foregroundColor: UIColor.white
+        ]
+
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
     }
@@ -48,6 +54,8 @@ struct PopularMoviesListScreen: View {
                     .foregroundColor(Color(.secondarySystemBackground))
                     .padding(.horizontal, 8)
                     .onTapGesture {
+                        let generator = UIImpactFeedbackGenerator(style: .heavy)
+                        generator.impactOccurred()
                         self.movies.reverse()
                 })
                 .navigationBarTitle("", displayMode: .inline)
@@ -59,6 +67,7 @@ struct PopularMoviesListScreen: View {
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .accentColor(Color("LightGreen"))
         .onAppear {
             NetworkManager.shared.fetchPopularMovies { (response: Result<[PopularMovie], CustomError>) in
                 switch response {

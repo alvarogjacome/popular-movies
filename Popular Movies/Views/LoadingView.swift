@@ -15,7 +15,7 @@ struct LoadingView: View {
     var body: some View {
         ZStack {
             Color.black
-                .opacity(0.7)
+                .opacity(0.4)
                 .edgesIgnoringSafeArea(.all)
 
             HStack(alignment: .center, spacing: shouldAnimate ? 15 : 5) {

@@ -1,15 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "33726e086fd631da13160fa503381b81.jpg",
+      "filename" : "PosterPlaceHolder@1x.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "PosterPlaceHolder@2x.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "PosterPlaceHolder@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
