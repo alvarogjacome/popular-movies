@@ -16,16 +16,16 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainLogo" translatesAutoresizingMaskIntoConstraints="NO" id="swn-As-tiL">
-                                <rect key="frame" x="50" y="294" width="314" height="318"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="mainLogo" translatesAutoresizingMaskIntoConstraints="NO" id="tCx-RE-YBy">
+                                <rect key="frame" x="87" y="384" width="240" height="128"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" name="MainBlue"/>
                         <constraints>
-                            <constraint firstItem="swn-As-tiL" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="QL5-en-CqB"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="swn-As-tiL" secondAttribute="trailing" constant="50" id="QkR-ym-ZtM"/>
-                            <constraint firstItem="swn-As-tiL" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="250" id="lx5-Jv-Bw5"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="swn-As-tiL" secondAttribute="bottom" constant="250" id="wwL-YK-e6o"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="tCx-RE-YBy" secondAttribute="bottom" constant="350" id="IcL-SN-rwe"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="tCx-RE-YBy" secondAttribute="trailing" constant="87" id="YUK-ae-DLW"/>
+                            <constraint firstItem="tCx-RE-YBy" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="340" id="dkx-wq-Hwh"/>
+                            <constraint firstItem="tCx-RE-YBy" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="oay-Kn-BO5"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

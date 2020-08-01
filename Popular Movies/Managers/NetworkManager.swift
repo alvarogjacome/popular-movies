@@ -29,11 +29,12 @@ final class NetworkManager {
                 completionHandler(.failure(.invalidData))
                 return
             }
+
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
-                let game = try decoder.decode(T.self, from: data)
-                completionHandler(.success(game))
+                let result = try decoder.decode(T.self, from: data)
+                completionHandler(.success(result))
             } catch {
                 completionHandler(.failure(.invalidData))
             }
@@ -41,7 +42,7 @@ final class NetworkManager {
         .resume()
     }
 
-    func fetchPopularMovies(completionHandler: @escaping (Result<[PopularMovie], CustomError>) -> Void) {
+    func fetchPopularMovies(with page: Int? = 1, completionHandler: @escaping (Result<[PopularMovie], CustomError>) -> Void) {
         fetch(from: URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=e1f6c97b51057579112740327d618edc")!) { (response: Result<PopularMoviesList, CustomError>) in
             switch response {
                 case .failure(let error):
@@ -63,5 +64,18 @@ final class NetworkManager {
         }
     }
 
-    func fetchMovieImage(completionHandler: @escaping (Image) -> Void) {}
+    func fetchMovieImage(from path: String?, completionHandler: @escaping (Image) -> Void) {
+        guard let path = path else { return }
+        guard let url = URL(string: "https://image.tmdb.org/t/p/w500\(path)") else { return }
+
+        URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
+            guard
+                error == nil,
+                let response = response as? HTTPURLResponse, response.statusCode == 200,
+                let data = data,
+                let image = UIImage(data: data)
+            else { return }
+            completionHandler(Image(uiImage: image))
+        }).resume()
+    }
 }

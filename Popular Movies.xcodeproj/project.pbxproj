@@ -23,6 +23,8 @@
 		CC901E0824D4CCC800DD2BDE /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC901E0724D4CCC800DD2BDE /* CustomError.swift */; };
 		CC901E0C24D4E64100DD2BDE /* MovieCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC901E0B24D4E64100DD2BDE /* MovieCellView.swift */; };
 		CC901E0E24D4E66E00DD2BDE /* Extension+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC901E0D24D4E66E00DD2BDE /* Extension+View.swift */; };
+		CC901E1024D502F100DD2BDE /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC901E0F24D502F100DD2BDE /* LoadingView.swift */; };
+		CCBA20A624D5A9070015996E /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCBA20A524D5A9070015996E /* SearchBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		CC901E0724D4CCC800DD2BDE /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
 		CC901E0B24D4E64100DD2BDE /* MovieCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCellView.swift; sourceTree = "<group>"; };
 		CC901E0D24D4E66E00DD2BDE /* Extension+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+View.swift"; sourceTree = "<group>"; };
+		CC901E0F24D502F100DD2BDE /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		CCBA20A524D5A9070015996E /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,6 +102,7 @@
 		CC29343F24D4A4840075AB29 /* Popular Movies */ = {
 			isa = PBXGroup;
 			children = (
+				CC29344924D4A4860075AB29 /* Assets.xcassets */,
 				CC901E0624D4CCBC00DD2BDE /* Enums */,
 				CC901E0324D4CC8200DD2BDE /* Managers */,
 				CC29346724D4A6AA0075AB29 /* Screens */,
@@ -133,7 +138,6 @@
 		CC29346624D4A66C0075AB29 /* Local Storage */ = {
 			isa = PBXGroup;
 			children = (
-				CC29344924D4A4860075AB29 /* Assets.xcassets */,
 				CC29344424D4A4840075AB29 /* Popular_Movies.xcdatamodeld */,
 			);
 			path = "Local Storage";
@@ -151,6 +155,8 @@
 			isa = PBXGroup;
 			children = (
 				CC901E0B24D4E64100DD2BDE /* MovieCellView.swift */,
+				CC901E0F24D502F100DD2BDE /* LoadingView.swift */,
+				CCBA20A524D5A9070015996E /* SearchBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -298,10 +304,12 @@
 				CC901DFE24D4ACF500DD2BDE /* PopularMovie.swift in Sources */,
 				CC901E0C24D4E64100DD2BDE /* MovieCellView.swift in Sources */,
 				CC901E0824D4CCC800DD2BDE /* CustomError.swift in Sources */,
+				CCBA20A624D5A9070015996E /* SearchBar.swift in Sources */,
 				CC29344124D4A4840075AB29 /* AppDelegate.swift in Sources */,
 				CC29344824D4A4840075AB29 /* PopularMoviesListScreen.swift in Sources */,
 				CC29344324D4A4840075AB29 /* SceneDelegate.swift in Sources */,
 				CC901E0E24D4E66E00DD2BDE /* Extension+View.swift in Sources */,
+				CC901E1024D502F100DD2BDE /* LoadingView.swift in Sources */,
 				CC901E0224D4B55200DD2BDE /* Genre.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

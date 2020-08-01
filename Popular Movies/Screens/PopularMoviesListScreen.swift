@@ -16,36 +16,20 @@ struct PopularMoviesListScreen: View {
     init() {
         let appearance = UINavigationBarAppearance()
         appearance.backgroundColor = UIColor(named: "MainBlue")
+        appearance.shadowColor = .clear
         UINavigationBar.appearance().standardAppearance = appearance
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
     }
 
     var body: some View {
         NavigationView {
-            VStack {
-                HStack {
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-
-                        TextField("Search", text: $search, onEditingChanged: { _ in
-                            self.isSearching = true
-                        })
-                            .foregroundColor(.primary)
-                    }
-                    .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
-                    .foregroundColor(.secondary)
-                    .background(Color(.secondarySystemBackground))
-                    .clipShape(RoundedRectangle(cornerRadius: 16))
-                }
-                .padding(.vertical, 10)
-                .padding(.horizontal, 15)
-                .background(Color("MainBlue").edgesIgnoringSafeArea(.top))
-
+            VStack(alignment: .leading, spacing: 0) {
+                SearchBar(search: $search, isSearching: $isSearching)
                 GeometryReader { geometry in
 
-                    ScrollView {
+                    ScrollView(.vertical) {
                         VStack(alignment: .center, spacing: 10) {
-                            ForEach(self.movies.sorted(by: { $0.voteAverage > $1.voteAverage })
+                            ForEach(self.movies
                                 .filter {
                                     $0.title.lowercased().contains(self.search.lowercased()) || self.search.isEmpty
                                 }
@@ -55,16 +39,25 @@ struct PopularMoviesListScreen: View {
                         }
                         .padding(.bottom)
                         .frame(width: UIScreen.main.bounds.width)
+                        .animation(.spring())
                     }
                 }
-                .navigationBarHidden(isSearching)
-                .navigationBarItems(leading: navigationBarLogo("logo"))
+                .navigationBarItems(leading: navigationBarLogo("logo"), trailing: Image(systemName: "arrow.up.arrow.down.circle.fill")
+                    .resizable()
+                    .scaleEffect(1.2)
+                    .foregroundColor(Color(.secondarySystemBackground))
+                    .padding(.horizontal, 8)
+                    .onTapGesture {
+                        self.movies.reverse()
+                })
                 .navigationBarTitle("", displayMode: .inline)
                 .background(Color(.tertiarySystemBackground))
                 .edgesIgnoringSafeArea([.horizontal, .bottom])
+                .onTapGesture {
+                    self.hideKeyboard()
+                }
             }
         }
-        .animation(.spring())
         .navigationViewStyle(StackNavigationViewStyle())
         .onAppear {
             NetworkManager.shared.fetchPopularMovies { (response: Result<[PopularMovie], CustomError>) in
@@ -72,8 +65,9 @@ struct PopularMoviesListScreen: View {
                     case .failure(let error):
                         dump(error)
                     case .success(let movies):
-                        self.movies = movies
-                        dump(movies)
+                        self.movies = movies.sorted(by: {
+                            $0.voteAverage > $1.voteAverage
+                        })
                 }
             }
         }

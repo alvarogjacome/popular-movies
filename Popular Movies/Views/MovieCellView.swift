@@ -9,6 +9,9 @@
 import SwiftUI
 
 struct MovieCellView: View {
+    @State private var image = Image(systemName: "photo.fill.on.rectangle.fill")
+    @State private var isLoadingImage: Bool = true
+
     let movie: PopularMovie
     let geometry: GeometryProxy
     var body: some View {
@@ -43,15 +46,39 @@ struct MovieCellView: View {
             .background(Color(.systemBackground))
             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
 
-            Image("drive")
-                .resizable()
-                .frame(width: geometry.size.width * 0.33, height: geometry.size.width * 0.48)
-                .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                .overlay(RoundedRectangle(cornerRadius: 16, style: .continuous)
-                    .stroke(Color(.systemGray4), lineWidth: 1))
-                .padding()
+            ZStack {
+                self.image
+                    .resizable()
+                    .scaledToFill()
+                    .frame(width: geometry.size.width * 0.33, height: geometry.size.width * 0.48)
+                    .background(Color("MainBlue"))
+                    .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                    .overlay(RoundedRectangle(cornerRadius: 16, style: .continuous)
+                        .stroke(LinearGradient(gradient: Gradient(colors: [Color("LightGreen"), Color("LightBlue")]), startPoint: .bottom, endPoint: .top), lineWidth: 0.5).opacity(0.8))
+                    .padding()
+                    .animation(.none)
+
+                if isLoadingImage {
+                    LoadingView(geometry: geometry)
+                        .scaledToFill()
+                        .frame(width: geometry.size.width * 0.33, height: geometry.size.width * 0.48)
+                        .background(Color("MainBlue"))
+                        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                        .overlay(RoundedRectangle(cornerRadius: 16, style: .continuous)
+                            .stroke(LinearGradient(gradient: Gradient(colors: [Color("LightGreen"), Color("LightBlue")]), startPoint: .bottom, endPoint: .top), lineWidth: 0.5).opacity(0.8))
+                        .padding()
+                }
+            }
         }
         .frame(width: geometry.size.width * 0.9)
         .shadow(radius: 10, x: 5, y: 5)
+        .onAppear(perform: {
+            NetworkManager.shared.fetchMovieImage(from: self.movie.posterPath, completionHandler: { image in
+                DispatchQueue.main.async {
+                    self.image = image
+                    self.isLoadingImage = false
+                }
+            })
+        })
     }
 }
