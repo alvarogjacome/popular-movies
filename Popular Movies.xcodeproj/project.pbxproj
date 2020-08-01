@@ -21,6 +21,8 @@
 		CC901E0224D4B55200DD2BDE /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC901E0124D4B55200DD2BDE /* Genre.swift */; };
 		CC901E0524D4CC8F00DD2BDE /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC901E0424D4CC8F00DD2BDE /* NetworkManager.swift */; };
 		CC901E0824D4CCC800DD2BDE /* CustomError.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC901E0724D4CCC800DD2BDE /* CustomError.swift */; };
+		CC901E0C24D4E64100DD2BDE /* MovieCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC901E0B24D4E64100DD2BDE /* MovieCellView.swift */; };
+		CC901E0E24D4E66E00DD2BDE /* Extension+View.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC901E0D24D4E66E00DD2BDE /* Extension+View.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +54,8 @@
 		CC901E0124D4B55200DD2BDE /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		CC901E0424D4CC8F00DD2BDE /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		CC901E0724D4CCC800DD2BDE /* CustomError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomError.swift; sourceTree = "<group>"; };
+		CC901E0B24D4E64100DD2BDE /* MovieCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCellView.swift; sourceTree = "<group>"; };
+		CC901E0D24D4E66E00DD2BDE /* Extension+View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Extension+View.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +150,7 @@
 		CC29346824D4A6B20075AB29 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CC901E0B24D4E64100DD2BDE /* MovieCellView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -153,6 +158,7 @@
 		CC29346924D4A6B70075AB29 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				CC901E0D24D4E66E00DD2BDE /* Extension+View.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -290,10 +296,12 @@
 				CC901DFC24D4AAB600DD2BDE /* PopularMoviesList.swift in Sources */,
 				CC29344624D4A4840075AB29 /* Popular_Movies.xcdatamodeld in Sources */,
 				CC901DFE24D4ACF500DD2BDE /* PopularMovie.swift in Sources */,
+				CC901E0C24D4E64100DD2BDE /* MovieCellView.swift in Sources */,
 				CC901E0824D4CCC800DD2BDE /* CustomError.swift in Sources */,
 				CC29344124D4A4840075AB29 /* AppDelegate.swift in Sources */,
 				CC29344824D4A4840075AB29 /* PopularMoviesListScreen.swift in Sources */,
 				CC29344324D4A4840075AB29 /* SceneDelegate.swift in Sources */,
+				CC901E0E24D4E66E00DD2BDE /* Extension+View.swift in Sources */,
 				CC901E0224D4B55200DD2BDE /* Genre.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
