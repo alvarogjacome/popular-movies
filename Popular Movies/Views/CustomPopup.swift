@@ -27,23 +27,23 @@ struct CustomPopup: View {
                     .padding()
 
                 Button(action: self.action) {
-                    Text("Ok")
+                    Text(Strings.ok)
                         .fontWeight(.medium)
                         .foregroundColor(Color(.systemBackground))
                         .padding(.vertical, 20)
                         .padding(.horizontal, 40)
                 }
-                .background(Color("LightGreen"))
+                .background(Colors.lightGreen)
                 .clipShape(RoundedRectangle(cornerRadius: 12))
-            .padding()
-
+                .padding()
             }
             .padding(20)
-            .background(Color("MainBlue")
+            .background(Colors.mainBlue
                 .opacity(0.9))
             .clipShape(RoundedRectangle(cornerRadius: 25))
-            .shadow(color: Color("LightGreen").opacity(0.5), radius: 10, x: -2, y: -2)
-            .shadow(color: Color("LightBlue").opacity(0.5), radius: 10, x: 2, y: 2)
+            .shadow(color: Colors.lightGreen.opacity(0.5), radius: 10, x: -2, y: -2)
+            .shadow(color: Colors.lightBlue.opacity(0.5), radius: 10, x: 2, y: 2)
+            .padding(20)
         }
     }
 }

@@ -13,13 +13,13 @@ struct DetailsModuleView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Details")
+            Text(Strings.details)
                 .font(.title)
                 .fontWeight(.light)
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 10) {
                     VStack(alignment: .leading) {
-                        Text("Original language:")
+                        Text(Strings.originalLanguage)
                             .font(.headline)
                             .fontWeight(.light)
                         Text(self.movieDetails.originalLanguage)
@@ -27,7 +27,7 @@ struct DetailsModuleView: View {
                             .fontWeight(.thin)
                     }
                     VStack(alignment: .leading) {
-                        Text("Revenue:")
+                        Text(Strings.revenue)
                             .font(.headline)
                             .fontWeight(.light)
                         Text("\(self.movieDetails.revenue)$")
@@ -35,7 +35,7 @@ struct DetailsModuleView: View {
                             .fontWeight(.thin)
                     }
                     VStack(alignment: .leading) {
-                        Text("Budget:")
+                        Text(Strings.budget)
                             .font(.headline)
                             .fontWeight(.light)
                         Text("\(self.movieDetails.budget)$")
@@ -46,22 +46,22 @@ struct DetailsModuleView: View {
 
                 Spacer()
 
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 10) {
                     VStack(alignment: .leading) {
-                        Text("Release date:")
+                        Text(Strings.releaseDate)
                             .font(.headline)
                             .fontWeight(.light)
                         Text(self.movieDetails.releaseDate)
                             .font(.subheadline)
                             .fontWeight(.thin)
-                        VStack(alignment: .leading) {
-                            Text("Adults:")
-                                .font(.headline)
-                                .fontWeight(.light)
-                            Text(self.movieDetails.adult ? "Yes" : "No")
-                                .font(.subheadline)
-                                .fontWeight(.thin)
-                        }
+                    }
+                    VStack(alignment: .leading) {
+                        Text(Strings.adults)
+                            .font(.headline)
+                            .fontWeight(.light)
+                        Text(self.movieDetails.adult ? Strings.yes : Strings.no)
+                            .font(.subheadline)
+                            .fontWeight(.thin)
                     }
                 }
             }

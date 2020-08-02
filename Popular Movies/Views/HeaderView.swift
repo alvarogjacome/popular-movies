@@ -16,28 +16,28 @@ struct HeaderView: View {
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            MovieImageView(path: movie.backdropPath!, placeholder: Image("BackdropPlaceholder").resizable(), loadingView: Image("BackdropPlaceholder"))
+            MovieImageView(path: movie.backdropPath!, placeholder: Images.backdropPlaceHolder.resizable(), loadingView: Images.backdropPlaceHolder.resizable())
                 .scaledToFill()
                 .frame(width: geometry.size.width, height: geometry.size.width * 0.65)
-                .overlay(Color("MainBlue").opacity(0.6))
+                .overlay(Colors.mainBlue.opacity(0.6))
                 .clipped()
 
-            MovieImageView(path: movie.posterPath!, placeholder: Image("PosterPlaceholder").resizable(), loadingView: Image("PosterPlaceholder").resizable())
+            MovieImageView(path: movie.posterPath!, placeholder: Images.posterPlaceholder.resizable(), loadingView: Images.posterPlaceholder.resizable())
                 .scaledToFill()
                 .frame(width: geometry.size.width * 0.33, height: geometry.size.width * 0.48)
                 .clipped()
-                .background(Color("MainBlue"))
+                .background(Colors.mainBlue)
                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
                 .overlay(RoundedRectangle(cornerRadius: 12, style: .continuous)
-                    .stroke(LinearGradient(gradient: Gradient(colors: [Color("LightGreen"), Color("LightBlue")]), startPoint: .bottom, endPoint: .top), lineWidth: 0.5).opacity(0.8))
+                    .stroke(LinearGradient(gradient: Gradient(colors: [Colors.lightGreen, Colors.lightBlue]), startPoint: .bottom, endPoint: .top), lineWidth: 0.5).opacity(0.8))
                 .padding()
-                .shadow(color: Color("LightGreen").opacity(0.4), radius: 20)
+                .shadow(color: Colors.lightGreen.opacity(0.4), radius: 20)
 
-            Image(systemName: "arrow.left.circle")
+            SFSymbols.arrowLeft
                 .resizable()
                 .foregroundColor(Color(.secondarySystemBackground))
                 .padding(2)
-                .background(LinearGradient(gradient: Gradient(colors: [Color("LightBlue"), Color("LightGreen"), Color("LightGreen")]), startPoint: .bottomLeading, endPoint: .topTrailing))
+                .background(LinearGradient(gradient: Gradient(colors: [Colors.lightBlue, Colors.lightGreen, Colors.lightGreen]), startPoint: .bottomLeading, endPoint: .topTrailing))
                 .clipShape(Circle())
                 .frame(width: geometry.size.width * 0.08, height: geometry.size.width * 0.08)
                 .clipped()
@@ -46,10 +46,10 @@ struct HeaderView: View {
                     let generator = UIImpactFeedbackGenerator(style: .soft)
                     self.presentationMode.wrappedValue.dismiss()
                     generator.impactOccurred()
-            }.zIndex(1)
+                }.zIndex(1)
         }
         .frame(width: geometry.size.width, height: geometry.size.width * 0.65)
         .padding(.bottom, 4)
-        .background(LinearGradient(gradient: Gradient(colors: [Color("LightGreen"), Color("LightBlue")]), startPoint: .leading, endPoint: .trailing))
+        .background(LinearGradient(gradient: Gradient(colors: [Colors.lightGreen, Colors.lightBlue]), startPoint: .leading, endPoint: .trailing))
     }
 }

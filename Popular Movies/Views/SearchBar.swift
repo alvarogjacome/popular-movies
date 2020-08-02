@@ -15,16 +15,16 @@ struct SearchBar: View {
     var body: some View {
         HStack {
             HStack(spacing: 2) {
-                Image(systemName: "magnifyingglass")
+                SFSymbols.glass
                     .padding(.horizontal, 8)
 
-                TextField("Search", text: $search, onEditingChanged: { searching in
+                TextField(Strings.search, text: $search, onEditingChanged: { searching in
                     self.isSearching = searching
                 })
                     .foregroundColor(.primary)
 
                 if !search.isEmpty {
-                    Image(systemName: "xmark.circle")
+                    SFSymbols.xmark
                         .onTapGesture {
                             self.hideKeyboard()
                             self.isSearching = false
@@ -41,10 +41,10 @@ struct SearchBar: View {
         }
         .padding(.vertical, 8)
         .padding(.horizontal)
-        .frame(width: UIScreen.main.bounds.width)
-        .background(Color("MainBlue")
+        .frame(width: ScreenSize.width)
+        .background(Colors.mainBlue
             .edgesIgnoringSafeArea(.top))
         .padding(.bottom, 4)
-        .background(LinearGradient(gradient: Gradient(colors: [Color("LightGreen"), Color("LightBlue")]), startPoint: .leading, endPoint: .trailing))
+        .background(LinearGradient(gradient: Gradient(colors: [Colors.lightGreen, Colors.lightBlue]), startPoint: .leading, endPoint: .trailing))
     }
 }

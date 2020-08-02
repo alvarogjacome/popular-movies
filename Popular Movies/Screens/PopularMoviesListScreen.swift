@@ -14,7 +14,7 @@ struct PopularMoviesListScreen: View {
 
     init() {
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = UIColor(named: "MainBlue")
+        appearance.backgroundColor = UIColors.mainBlue
         appearance.shadowColor = .clear
 
         appearance.titleTextAttributes = [
@@ -61,6 +61,6 @@ struct PopularMoviesListScreen: View {
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .accentColor(Color("LightGreen"))
+        .accentColor(Colors.lightGreen)
     }
 }

@@ -11,7 +11,7 @@ import SwiftUI
 struct ReorderButton: View {
     let action: () -> Void
     var body: some View {
-        Image(systemName: "arrow.up.arrow.down.circle.fill")
+        SFSymbols.arrowDown
             .resizable()
             .scaleEffect(1.2)
             .foregroundColor(Color(.secondarySystemBackground))

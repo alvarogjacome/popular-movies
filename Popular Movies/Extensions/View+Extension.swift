@@ -13,7 +13,7 @@ extension View {
         Image(name)
             .resizable()
             .scaledToFit()
-            .frame(width: UIScreen.main.bounds.width / 3)
+            .frame(width: ScreenSize.width / 3)
     }
 }
 

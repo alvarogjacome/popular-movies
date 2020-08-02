@@ -27,7 +27,7 @@ struct MainModuleView: View {
                         .font(.subheadline)
                         .fontWeight(.ultraLight)
                 }
-                Text("Original title: \(self.movieDetails.originalTitle)")
+                Text(String(format: Strings.originalTitle, self.movieDetails.originalTitle))
                     .font(.caption)
                     .fontWeight(.ultraLight)
             }
@@ -36,14 +36,14 @@ struct MainModuleView: View {
                 Text(String(format: "%.1f", self.movieDetails.voteAverage))
                     .font(.headline)
                     .fontWeight(.medium)
-                    .foregroundColor(Color("MainBlue"))
+                    .foregroundColor(Colors.mainBlue)
                     .padding(10)
-                    .background(LinearGradient(gradient: Gradient(colors: [Color("LightBlue"), Color("LightGreen"), Color("LightGreen")]), startPoint: .bottomLeading, endPoint: .topTrailing))
+                    .background(LinearGradient(gradient: Gradient(colors: [Colors.lightBlue, Colors.lightGreen, Colors.lightGreen]), startPoint: .bottomLeading, endPoint: .topTrailing))
                     .clipShape(Circle())
                 Text(self.movieDetails.status)
                     .font(.caption)
                     .fontWeight(.ultraLight)
-                Text("\(self.movieDetails.runtime) min")
+                Text(String(format: Strings.minutes, self.movieDetails.runtime))
                     .font(.headline)
                     .fontWeight(.ultraLight)
             }

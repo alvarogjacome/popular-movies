@@ -39,7 +39,7 @@ private struct BigColumn: View {
     var body: some View {
         VStack(spacing: 20) {
             RoundedRectangle(cornerRadius: 16)
-                .fill(LinearGradient(gradient: Gradient(colors: [Color("LightGreen"), Color("LightBlue")]), startPoint: .leading, endPoint: .trailing))
+                .fill(LinearGradient(gradient: Gradient(colors: [Colors.lightGreen, Colors.lightBlue]), startPoint: .leading, endPoint: .trailing))
                 .frame(width: geometry.size.height * 0.015, height: geometry.size.height * 0.030)
                 .scaleEffect(shouldAnimate ? 2 : 1)
         }
@@ -54,7 +54,7 @@ private struct LittleColumn: View {
     var body: some View {
         VStack(spacing: 20) {
             RoundedRectangle(cornerRadius: 16)
-                .fill(LinearGradient(gradient: Gradient(colors: [Color("LightGreen"), Color("LightBlue")]), startPoint: .leading, endPoint: .trailing))
+                .fill(LinearGradient(gradient: Gradient(colors: [Colors.lightGreen, Colors.lightBlue]), startPoint: .leading, endPoint: .trailing))
                 .frame(width: geometry.size.height * 0.015, height: geometry.size.height * 0.030)
                 .scaleEffect(shouldAnimate ? 1 : 2)
         }

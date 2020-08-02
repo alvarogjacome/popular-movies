@@ -30,18 +30,22 @@ class PopularMovieListViewModel: ObservableObject {
                         self.movies = movies
                         self.state = .loaded
                     case .failure(let error):
-                        PersistenceManager.retrievePopuplarMovies { (response: Result<[PopularMovie], CustomError>) in
-                            switch response {
-                                case .success(let movies):
-                                    self.movies = movies
-                                    self.state = .error
-                                    self.error = CustomError.loadedFromStorage
-                                case .failure:
-                                    self.error = error
-                                    self.state = .error
-                            }
-                        }
+                        self.fetchLocalStoredMovies(error: error)
                 }
+            }
+        }
+    }
+
+    private func fetchLocalStoredMovies(error: CustomError) {
+        PersistenceManager.retrievePopuplarMovies { (response: Result<[PopularMovie], CustomError>) in
+            switch response {
+                case .success(let movies):
+                    self.movies = movies
+                    self.state = .error
+                    self.error = CustomError.loadedFromStorage
+                case .failure:
+                    self.error = error
+                    self.state = .error
             }
         }
     }

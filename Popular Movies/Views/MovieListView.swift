@@ -23,7 +23,7 @@ struct MoviesListView: View {
                 }
             }
             .padding(.bottom)
-            .frame(width: UIScreen.main.bounds.width)
+            .frame(width: ScreenSize.width)
             .animation(.spring())
         }
     }

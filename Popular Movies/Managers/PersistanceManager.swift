@@ -20,12 +20,12 @@ enum PersistenceManager {
     }
 
     static func retrievePopuplarMovies(completed: @escaping (Result<[PopularMovie], CustomError>) -> Void) {
-        guard let favoritesData = defaults.object(forKey: keys.popularMovies.rawValue) as? Data else {
+        guard let popularMovies = defaults.object(forKey: keys.popularMovies.rawValue) as? Data else {
             completed(.failure(.unableToComplete))
             return
         }
         do {
-            let movies = try JSONDecoder().decode([PopularMovie].self, from: favoritesData)
+            let movies = try JSONDecoder().decode([PopularMovie].self, from: popularMovies)
             if !movies.isEmpty {
                 completed(.success(movies))
             } else {
@@ -41,7 +41,6 @@ enum PersistenceManager {
 
         do {
             try defaults.set(JSONEncoder().encode(movies), forKey: keys.popularMovies.rawValue)
-            dump(movies)
             return nil
         } catch {
             return .unableToSave
