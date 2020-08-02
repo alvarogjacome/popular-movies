@@ -9,18 +9,18 @@
 import SwiftUI
 
 struct SummaryModuleView: View {
-    @Binding var movieDetails: Movie?
+    let movieDetails: Movie
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Synopsis")
+            Text(Strings.synopsis)
                 .font(.title)
                 .fontWeight(.light)
             HStack(alignment: .top) {
-                Text(self.movieDetails!.overview)
+                Text(self.movieDetails.overview)
                     .font(.headline)
                     .fontWeight(.light)
-               Spacer(minLength: 0)
+                Spacer(minLength: 0)
             }
         }
     }

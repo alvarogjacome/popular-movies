@@ -14,21 +14,21 @@ struct LoadingView: View {
 
     var body: some View {
         ZStack {
-            Color.black
+            Color(.black)
                 .opacity(0.4)
                 .edgesIgnoringSafeArea(.all)
 
-            HStack(alignment: .center, spacing: shouldAnimate ? 15 : 5) {
+            HStack(alignment: .center, spacing: shouldAnimate ? 25 : 10) {
                 LittleColumn(shouldAnimate: $shouldAnimate, geometry: geometry)
                 BigColumn(shouldAnimate: $shouldAnimate, geometry: geometry)
                 LittleColumn(shouldAnimate: $shouldAnimate, geometry: geometry)
             }
-            .frame(width: shouldAnimate ? geometry.size.width * 0.20 : geometry.size.width * 0.30)
-            .animation(Animation.easeInOut(duration: 0.5).repeatForever(autoreverses: true))
+            .animation(Animation.spring().repeatForever(autoreverses: true))
             .onAppear {
                 self.shouldAnimate = true
             }
         }
+        .animation(.spring())
     }
 }
 
@@ -38,9 +38,9 @@ private struct BigColumn: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            Circle()
-                .fill(LinearGradient(gradient: Gradient(colors: [Color("LightGreen"), Color("LightBlue")]), startPoint: .leading, endPoint: .trailing))
-                .frame(width: geometry.size.height * 0.015)
+            RoundedRectangle(cornerRadius: 16)
+                .fill(LinearGradient(gradient: Gradient(colors: [Colors.lightGreen, Colors.lightBlue]), startPoint: .leading, endPoint: .trailing))
+                .frame(width: geometry.size.height * 0.015, height: geometry.size.height * 0.030)
                 .scaleEffect(shouldAnimate ? 2 : 1)
         }
         .shadow(color: .black, radius: 5)
@@ -53,9 +53,9 @@ private struct LittleColumn: View {
 
     var body: some View {
         VStack(spacing: 20) {
-            Circle()
-                .fill(LinearGradient(gradient: Gradient(colors: [Color("LightGreen"), Color("LightBlue")]), startPoint: .leading, endPoint: .trailing))
-                .frame(width: geometry.size.height * 0.015)
+            RoundedRectangle(cornerRadius: 16)
+                .fill(LinearGradient(gradient: Gradient(colors: [Colors.lightGreen, Colors.lightBlue]), startPoint: .leading, endPoint: .trailing))
+                .frame(width: geometry.size.height * 0.015, height: geometry.size.height * 0.030)
                 .scaleEffect(shouldAnimate ? 1 : 2)
         }
         .shadow(color: .black, radius: 5)

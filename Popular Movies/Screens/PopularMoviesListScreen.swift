@@ -9,13 +9,12 @@
 import SwiftUI
 
 struct PopularMoviesListScreen: View {
-    @State private var movies: [PopularMovie] = [PopularMovie]()
-    @State private var search: String = ""
+    @ObservedObject var viewModel = PopularMovieListViewModel()
     @State private var isSearching: Bool = false
 
     init() {
         let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = UIColor(named: "MainBlue")
+        appearance.backgroundColor = UIColors.mainBlue
         appearance.shadowColor = .clear
 
         appearance.titleTextAttributes = [
@@ -28,58 +27,40 @@ struct PopularMoviesListScreen: View {
     }
 
     var body: some View {
-        NavigationView {
-            VStack(alignment: .leading, spacing: 0) {
-                SearchBar(search: $search, isSearching: $isSearching)
-                GeometryReader { geometry in
+        GeometryReader { geometry in
+            ZStack {
+                if self.viewModel.state == .loading {
+                    LoadingView(geometry: geometry)
+                        .transition(.opacity)
+                        .zIndex(1)
 
-                    ScrollView(.vertical) {
-                        VStack(alignment: .center, spacing: 10) {
-                            ForEach(self.movies
-                                .filter {
-                                    $0.title.lowercased().contains(self.search.lowercased()) || self.search.isEmpty
-                                }
-                            ) { movie in
-                                MovieCellView(movie: movie, geometry: geometry)
-                                    .fixedSize(horizontal: false, vertical: true)
-                            }
-                        }
-                        .padding(.bottom)
-                        .frame(width: UIScreen.main.bounds.width)
-                        .animation(.spring())
-                    }
+                } else if self.viewModel.state == .error {
+                    CustomPopup(message: self.viewModel.error!.rawValue, action: self.viewModel.errorButtonAction)
+                        .zIndex(1)
                 }
-                .navigationBarItems(leading: navigationBarLogo("logo"), trailing: Image(systemName: "arrow.up.arrow.down.circle.fill")
-                    .resizable()
-                    .scaleEffect(1.2)
-                    .foregroundColor(Color(.secondarySystemBackground))
-                    .padding(.horizontal, 8)
+
+                NavigationView {
+                    VStack(alignment: .leading, spacing: 0) {
+                        SearchBar(search: self.$viewModel.search, isSearching: self.$isSearching)
+
+                        if self.viewModel.state == .loaded {
+                            MoviesListView(movieList: self.viewModel.getMovies()!, geometry: geometry)
+                        } else {
+                            Spacer()
+                        }
+                    }
+                    .navigationBarItems(leading: self.navigationBarLogo("logo"), trailing:
+                        ReorderButton(action: self.viewModel.reorderButtonAction))
+                    .navigationBarTitle("", displayMode: .inline)
+                    .background(Color(.tertiarySystemBackground))
+                    .edgesIgnoringSafeArea([.horizontal, .bottom])
                     .onTapGesture {
-                        let generator = UIImpactFeedbackGenerator(style: .heavy)
-                        generator.impactOccurred()
-                        self.movies.reverse()
-                })
-                .navigationBarTitle("", displayMode: .inline)
-                .background(Color(.tertiarySystemBackground))
-                .edgesIgnoringSafeArea([.horizontal, .bottom])
-                .onTapGesture {
-                    self.hideKeyboard()
+                        self.hideKeyboard()
+                    }
                 }
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
-        .accentColor(Color("LightGreen"))
-        .onAppear {
-            NetworkManager.shared.fetchPopularMovies { (response: Result<[PopularMovie], CustomError>) in
-                switch response {
-                    case .failure(let error):
-                        dump(error)
-                    case .success(let movies):
-                        self.movies = movies.sorted(by: {
-                            $0.popularity > $1.popularity
-                        })
-                }
-            }
-        }
+        .accentColor(Colors.lightGreen)
     }
 }

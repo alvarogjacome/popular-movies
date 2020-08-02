@@ -9,36 +9,36 @@
 import SwiftUI
 
 struct DetailsModuleView: View {
-    @Binding var movieDetails: Movie?
+    let movieDetails: Movie
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Details")
+            Text(Strings.details)
                 .font(.title)
                 .fontWeight(.light)
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 10) {
                     VStack(alignment: .leading) {
-                        Text("Original language:")
+                        Text(Strings.originalLanguage)
                             .font(.headline)
                             .fontWeight(.light)
-                        Text(self.movieDetails!.originalLanguage)
+                        Text(self.movieDetails.originalLanguage)
                             .font(.subheadline)
                             .fontWeight(.thin)
                     }
                     VStack(alignment: .leading) {
-                        Text("Revenue:")
+                        Text(Strings.revenue)
                             .font(.headline)
                             .fontWeight(.light)
-                        Text("\(self.movieDetails!.revenue)$")
+                        Text("\(self.movieDetails.revenue)$")
                             .font(.subheadline)
                             .fontWeight(.thin)
                     }
                     VStack(alignment: .leading) {
-                        Text("Budget:")
+                        Text(Strings.budget)
                             .font(.headline)
                             .fontWeight(.light)
-                        Text("\(self.movieDetails!.budget)$")
+                        Text("\(self.movieDetails.budget)$")
                             .font(.subheadline)
                             .fontWeight(.thin)
                     }
@@ -46,12 +46,20 @@ struct DetailsModuleView: View {
 
                 Spacer()
 
-                VStack(alignment: .leading) {
+                VStack(alignment: .leading, spacing: 10) {
                     VStack(alignment: .leading) {
-                        Text("Release date:")
+                        Text(Strings.releaseDate)
                             .font(.headline)
                             .fontWeight(.light)
-                        Text(self.movieDetails!.releaseDate)
+                        Text(self.movieDetails.releaseDate)
+                            .font(.subheadline)
+                            .fontWeight(.thin)
+                    }
+                    VStack(alignment: .leading) {
+                        Text(Strings.adults)
+                            .font(.headline)
+                            .fontWeight(.light)
+                        Text(self.movieDetails.adult ? Strings.yes : Strings.no)
                             .font(.subheadline)
                             .fontWeight(.thin)
                     }
