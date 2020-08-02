@@ -6,29 +6,49 @@
 //  Copyright © 2020 alvarogjacome. All rights reserved.
 //
 
-import XCTest
 @testable import Popular_Movies
+import XCTest
 
 class Popular_MoviesTests: XCTestCase {
+    let networkManager = NetworkManager.shared
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
+    func test_fetch_popular_movies_success() {
+        let moviesExpectation = expectation(description: "popularMovies")
+        var moviesResponse: [PopularMovie]?
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+        networkManager.fetchPopularMovies { (response: Result<[PopularMovie], CustomError>) in
+            switch response {
+                case .success(let movies):
+                    moviesResponse = movies
+                    moviesExpectation.fulfill()
+                case .failure:
+                    break
+            }
+        }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+        waitForExpectations(timeout: 1) { _ in
+            XCTAssertNotNil(moviesResponse)
         }
     }
 
+    func test_fetch_movie_details_success() {
+        let movieExpectation = expectation(description: "movieDetails")
+        var movieDetails: Movie?
+
+        let movieId = 64690
+
+        networkManager.fetchMovieDetails(with: movieId) { (response: Result<Movie, CustomError>) in
+            switch response {
+                case .success(let movie):
+                    movieDetails = movie
+                    movieExpectation.fulfill()
+                case .failure:
+                    break
+            }
+        }
+
+        waitForExpectations(timeout: 1) { _ in
+            XCTAssertNotNil(movieDetails)
+        }
+    }
 }
