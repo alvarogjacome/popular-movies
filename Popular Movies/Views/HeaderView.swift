@@ -16,13 +16,13 @@ struct HeaderView: View {
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            MovieImageView(path: movie.backdropPath!, placeholder: Image("BackdropPlaceholder"), loadingView: LoadingView(geometry: geometry))
+            MovieImageView(path: movie.backdropPath!, placeholder: Image("BackdropPlaceholder").resizable(), loadingView: Image("BackdropPlaceholder"))
                 .scaledToFill()
                 .frame(width: geometry.size.width, height: geometry.size.width * 0.65)
                 .overlay(Color("MainBlue").opacity(0.6))
                 .clipped()
 
-            MovieImageView(path: movie.posterPath!, placeholder: Image("PosterPlaceholder").resizable(), loadingView: LoadingView(geometry: geometry))
+            MovieImageView(path: movie.posterPath!, placeholder: Image("PosterPlaceholder").resizable(), loadingView: Image("PosterPlaceholder").resizable())
                 .scaledToFill()
                 .frame(width: geometry.size.width * 0.33, height: geometry.size.width * 0.48)
                 .clipped()
@@ -46,7 +46,7 @@ struct HeaderView: View {
                     let generator = UIImpactFeedbackGenerator(style: .soft)
                     self.presentationMode.wrappedValue.dismiss()
                     generator.impactOccurred()
-                }
+            }.zIndex(1)
         }
         .frame(width: geometry.size.width, height: geometry.size.width * 0.65)
         .padding(.bottom, 4)

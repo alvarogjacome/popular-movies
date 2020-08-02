@@ -9,41 +9,42 @@
 import SwiftUI
 
 struct MovieDetailScreen: View {
-    @State private var movieDetails: Movie?
-
-    let movie: PopularMovie
+    @ObservedObject var viewModel: DetailScreenViewModel
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
     var body: some View {
         GeometryReader { geometry in
-            VStack(spacing: 0) {
-                HeaderView(movie: self.movie, geometry: geometry)
-                ScrollView(.vertical) {
-                    if self.movieDetails != nil {
-                        VStack {
-                            MainModuleView(movieDetails: self.$movieDetails)
-                                .modifier(ModuleModifier(geometry: geometry))
-                            SummaryModuleView(movieDetails: self.$movieDetails)
-                                .modifier(ModuleModifier(geometry: geometry))
-                            DetailsModuleView(movieDetails: self.$movieDetails)
-                                .modifier(ModuleModifier(geometry: geometry))
+            ZStack {
+                VStack(spacing: 0) {
+                    HeaderView(movie: self.viewModel.getPopularMovie(), geometry: geometry)
+                    if self.viewModel.state == .loaded {
+                        ScrollView(.vertical) {
+                            VStack {
+                                MainModuleView(movieDetails: self.viewModel.movie!)
+                                    .modifier(ModuleModifier(geometry: geometry))
+                                SummaryModuleView(movieDetails: self.viewModel.movie!)
+                                    .modifier(ModuleModifier(geometry: geometry))
+                                DetailsModuleView(movieDetails: self.viewModel.movie!)
+                                    .modifier(ModuleModifier(geometry: geometry))
+                            }
+                            .padding(.bottom)
                         }
-                        .padding(.bottom)
-                    }
+                    } else { Spacer() }
                 }
                 .animation(.spring())
-            }
-            .background(Color(.secondarySystemBackground))
-        }
-        .edgesIgnoringSafeArea(.vertical)
-        .onAppear {
-            NetworkManager.shared.fetchMovieDetails(with: self.movie.id) { (response: Result<Movie, CustomError>) in
-                switch response {
-                    case .failure(let error):
-                        dump(error)
-                    case .success(let movie):
-                        self.movieDetails = movie
+
+                if self.viewModel.state == .loading {
+                    LoadingView(geometry: geometry)
+                        .transition(.opacity)
+                } else if self.viewModel.state == .error {
+                    CustomPopup(message: self.viewModel.error!.rawValue, action: { self.presentationMode.wrappedValue.dismiss() })
                 }
             }
         }
+        .background(Color(.secondarySystemBackground))
+        .edgesIgnoringSafeArea(.vertical)
+        .navigationBarTitle("")
+        .navigationBarHidden(true)
+        .onAppear(perform: self.viewModel.fetchMovieDetails)
     }
 }

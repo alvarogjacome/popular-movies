@@ -9,7 +9,7 @@
 import SwiftUI
 
 struct DetailsModuleView: View {
-    @Binding var movieDetails: Movie?
+    let movieDetails: Movie
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
@@ -22,7 +22,7 @@ struct DetailsModuleView: View {
                         Text("Original language:")
                             .font(.headline)
                             .fontWeight(.light)
-                        Text(self.movieDetails!.originalLanguage)
+                        Text(self.movieDetails.originalLanguage)
                             .font(.subheadline)
                             .fontWeight(.thin)
                     }
@@ -30,7 +30,7 @@ struct DetailsModuleView: View {
                         Text("Revenue:")
                             .font(.headline)
                             .fontWeight(.light)
-                        Text("\(self.movieDetails!.revenue)$")
+                        Text("\(self.movieDetails.revenue)$")
                             .font(.subheadline)
                             .fontWeight(.thin)
                     }
@@ -38,7 +38,7 @@ struct DetailsModuleView: View {
                         Text("Budget:")
                             .font(.headline)
                             .fontWeight(.light)
-                        Text("\(self.movieDetails!.budget)$")
+                        Text("\(self.movieDetails.budget)$")
                             .font(.subheadline)
                             .fontWeight(.thin)
                     }
@@ -51,7 +51,7 @@ struct DetailsModuleView: View {
                         Text("Release date:")
                             .font(.headline)
                             .fontWeight(.light)
-                        Text(self.movieDetails!.releaseDate)
+                        Text(self.movieDetails.releaseDate)
                             .font(.subheadline)
                             .fontWeight(.thin)
                     }

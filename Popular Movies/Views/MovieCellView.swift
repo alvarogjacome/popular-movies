@@ -12,7 +12,8 @@ struct MovieCellView: View {
     let movie: PopularMovie
     let geometry: GeometryProxy
     var body: some View {
-        NavigationLink(destination: MovieDetailScreen(movie: movie).navigationBarTitle(self.movie.title)
+        NavigationLink(destination: MovieDetailScreen(viewModel: DetailScreenViewModel(wid: movie))
+            .navigationBarTitle("")
             .navigationBarHidden(true)) {
             ZStack(alignment: .bottomLeading) {
                 HStack(alignment: .center) {

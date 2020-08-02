@@ -6,6 +6,7 @@
 //  Copyright © 2020 alvarogjacome. All rights reserved.
 //
 
+import Combine
 import SwiftUI
 
 final class NetworkManager {

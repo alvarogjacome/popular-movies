@@ -13,6 +13,7 @@ struct ModuleModifier: ViewModifier {
 
     func body(content: Content) -> some View {
         content
+            .animation(.none)
             .padding()
             .background(Color(.systemBackground))
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
@@ -21,6 +22,5 @@ struct ModuleModifier: ViewModifier {
             .shadow(radius: 10, x: 5, y: 5)
             .padding([.top, .horizontal])
             .fixedSize(horizontal: false, vertical: true)
-
     }
 }

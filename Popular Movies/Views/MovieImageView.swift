@@ -8,14 +8,14 @@
 
 import SwiftUI
 
-struct MovieImageView<Placeholder: View, LoadingView: View>: View {
+struct MovieImageView<LoadingView: View>: View {
     @State private var movieImage: Image?
     @State private var loadingCompleted = false
-    private let placeholder: Placeholder
-    private let loadingView: LoadingView?
+    private let placeholder: Image
+    private let loadingView: LoadingView
     private let path: String
 
-    init(path: String, placeholder: Placeholder, loadingView: LoadingView? = nil) {
+    init(path: String, placeholder: Image, loadingView: LoadingView) {
         self.path = path
         self.placeholder = placeholder
         self.loadingView = loadingView
