@@ -23,4 +23,4 @@ https://dribbble.com/shots/9017531-Movie-app-collection
 
 ## API
 
-The app uses https://developers.themoviedb.org/3/movies/get-popular-movies API
+The app uses [TMDB](https://developers.themoviedb.org/3/ )API
