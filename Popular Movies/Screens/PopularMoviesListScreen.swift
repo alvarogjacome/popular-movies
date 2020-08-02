@@ -41,6 +41,7 @@ struct PopularMoviesListScreen: View {
                                 }
                             ) { movie in
                                 MovieCellView(movie: movie, geometry: geometry)
+                                    .fixedSize(horizontal: false, vertical: true)
                             }
                         }
                         .padding(.bottom)
@@ -75,7 +76,7 @@ struct PopularMoviesListScreen: View {
                         dump(error)
                     case .success(let movies):
                         self.movies = movies.sorted(by: {
-                            $0.voteAverage > $1.voteAverage
+                            $0.popularity > $1.popularity
                         })
                 }
             }

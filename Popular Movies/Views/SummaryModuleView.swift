@@ -13,13 +13,15 @@ struct SummaryModuleView: View {
 
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
-            Text("Summary")
+            Text("Synopsis")
                 .font(.title)
                 .fontWeight(.light)
-            Text(self.movieDetails!.overview)
-                .font(.headline)
-                .fontWeight(.light)
+            HStack(alignment: .top) {
+                Text(self.movieDetails!.overview)
+                    .font(.headline)
+                    .fontWeight(.light)
+               Spacer(minLength: 0)
+            }
         }
-        .modifier(ModuleModifier())
     }
 }

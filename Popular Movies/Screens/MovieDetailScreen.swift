@@ -20,15 +20,22 @@ struct MovieDetailScreen: View {
                 HeaderView(moviePoster: self.moviePoster, movie: self.movie, geometry: geometry)
                 ScrollView(.vertical) {
                     if self.movieDetails != nil {
-                        MainModuleView(movieDetails: self.$movieDetails)
-                        SummaryModuleView(movieDetails: self.$movieDetails)
-                        DetailsModuleView(movieDetails: self.$movieDetails)
+                        VStack {
+                            MainModuleView(movieDetails: self.$movieDetails)
+                                .modifier(ModuleModifier(geometry: geometry))
+                            SummaryModuleView(movieDetails: self.$movieDetails)
+                                .modifier(ModuleModifier(geometry: geometry))
+                            DetailsModuleView(movieDetails: self.$movieDetails)
+                                .modifier(ModuleModifier(geometry: geometry))
+                        }
+                        .padding(.bottom)
                     }
                 }
+                .animation(.spring())
             }
             .background(Color(.secondarySystemBackground))
         }
-        .edgesIgnoringSafeArea(.all)
+        .edgesIgnoringSafeArea(.vertical)
         .onAppear {
             NetworkManager.shared.fetchMovieDetails(with: self.movie.id) { (response: Result<Movie, CustomError>) in
                 switch response {

@@ -16,48 +16,47 @@ struct DetailsModuleView: View {
             Text("Details")
                 .font(.title)
                 .fontWeight(.light)
-            HStack {
-                VStack {
-                    VStack {
-                        Text("Original Language")
+            HStack(alignment: .top) {
+                VStack(alignment: .leading, spacing: 10) {
+                    VStack(alignment: .leading) {
+                        Text("Original language:")
                             .font(.headline)
                             .fontWeight(.light)
                         Text(self.movieDetails!.originalLanguage)
-                            .font(.headline)
-                            .fontWeight(.light)
+                            .font(.subheadline)
+                            .fontWeight(.thin)
                     }
-                    VStack {
-                        Text("Revenue")
+                    VStack(alignment: .leading) {
+                        Text("Revenue:")
                             .font(.headline)
                             .fontWeight(.light)
-                        Text("\(self.movieDetails!.revenue)")
-                            .font(.headline)
-                            .fontWeight(.light)
+                        Text("\(self.movieDetails!.revenue)$")
+                            .font(.subheadline)
+                            .fontWeight(.thin)
                     }
-                    VStack {
-                        Text("Budget")
+                    VStack(alignment: .leading) {
+                        Text("Budget:")
                             .font(.headline)
                             .fontWeight(.light)
-                        Text("\(self.movieDetails!.revenue)")
-                            .font(.headline)
-                            .fontWeight(.light)
+                        Text("\(self.movieDetails!.budget)$")
+                            .font(.subheadline)
+                            .fontWeight(.thin)
                     }
                 }
 
                 Spacer()
 
-                VStack {
-                    VStack {
-                        Text("Release date")
+                VStack(alignment: .leading) {
+                    VStack(alignment: .leading) {
+                        Text("Release date:")
                             .font(.headline)
                             .fontWeight(.light)
                         Text(self.movieDetails!.releaseDate)
-                            .font(.headline)
-                            .fontWeight(.light)
+                            .font(.subheadline)
+                            .fontWeight(.thin)
                     }
                 }
             }
         }
-        .modifier(ModuleModifier())
     }
 }

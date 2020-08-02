@@ -12,18 +12,21 @@ struct MainModuleView: View {
     @Binding var movieDetails: Movie?
 
     var body: some View {
-        HStack(alignment: .center) {
+        HStack(alignment: .top) {
             VStack(alignment: .leading, spacing: 8) {
                 Text(self.movieDetails!.title)
-                    .font(.largeTitle)
+                    .font(.title)
                     .fontWeight(.light)
+                    .layoutPriority(1)
                 Text(self.getGenres())
                     .font(.headline)
                     .fontWeight(.light)
                     .multilineTextAlignment(.leading)
-                Text(self.movieDetails!.tagline)
-                    .font(.headline)
-                    .fontWeight(.ultraLight)
+                if !self.movieDetails!.tagline.isEmpty {
+                    Text(self.movieDetails!.tagline)
+                        .font(.subheadline)
+                        .fontWeight(.ultraLight)
+                }
                 Text("Original title: \(self.movieDetails!.originalTitle)")
                     .font(.caption)
                     .fontWeight(.ultraLight)
@@ -37,7 +40,6 @@ struct MainModuleView: View {
                     .padding(10)
                     .background(LinearGradient(gradient: Gradient(colors: [Color("LightBlue"), Color("LightGreen"), Color("LightGreen")]), startPoint: .bottomLeading, endPoint: .topTrailing))
                     .clipShape(Circle())
-                    .padding(.vertical)
                 Text(self.movieDetails!.status)
                     .font(.caption)
                     .fontWeight(.ultraLight)
@@ -46,7 +48,6 @@ struct MainModuleView: View {
                     .fontWeight(.ultraLight)
             }
         }
-        .modifier(ModuleModifier())
     }
 
     private func getGenres() -> String {

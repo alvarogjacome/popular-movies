@@ -37,7 +37,7 @@ struct MovieCellView: View {
                         Text(movie.overview)
                             .font(.caption)
                             .fontWeight(.light)
-                        Text("Release date: \(movie.releaseDate)")
+                        Text("Release: \(movie.releaseDate)")
                             .font(.caption)
                             .fontWeight(.light)
                     }
@@ -46,7 +46,7 @@ struct MovieCellView: View {
                 }
                 .frame(height: geometry.size.width * 0.4)
                 .background(Color(.systemBackground))
-                .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
 
                 ZStack {
                     self.image
@@ -54,8 +54,8 @@ struct MovieCellView: View {
                         .scaledToFill()
                         .frame(width: geometry.size.width * 0.33, height: geometry.size.width * 0.48)
                         .background(Color("MainBlue"))
-                        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                        .overlay(RoundedRectangle(cornerRadius: 16, style: .continuous)
+                        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                        .overlay(RoundedRectangle(cornerRadius: 12, style: .continuous)
                             .stroke(LinearGradient(gradient: Gradient(colors: [Color("LightGreen"), Color("LightBlue")]), startPoint: .bottom, endPoint: .top), lineWidth: 0.5).opacity(0.8))
                         .padding()
                         .animation(.none)
@@ -65,8 +65,8 @@ struct MovieCellView: View {
                             .scaledToFill()
                             .frame(width: geometry.size.width * 0.33, height: geometry.size.width * 0.48)
                             .background(Color("MainBlue"))
-                            .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
-                            .overlay(RoundedRectangle(cornerRadius: 16, style: .continuous)
+                            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                            .overlay(RoundedRectangle(cornerRadius: 12, style: .continuous)
                                 .stroke(LinearGradient(gradient: Gradient(colors: [Color("LightGreen"), Color("LightBlue")]), startPoint: .bottom, endPoint: .top), lineWidth: 0.5).opacity(0.8))
                             .padding()
                     }
