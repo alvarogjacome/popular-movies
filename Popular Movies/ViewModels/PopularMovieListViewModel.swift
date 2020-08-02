@@ -26,11 +26,21 @@ class PopularMovieListViewModel: ObservableObject {
             DispatchQueue.main.async {
                 switch response {
                     case .success(let movies):
+                        PersistenceManager.updateWith(movies: movies)
                         self.movies = movies
                         self.state = .loaded
                     case .failure(let error):
-                        self.error = error
-                        self.state = .error
+                        PersistenceManager.retrievePopuplarMovies { (response: Result<[PopularMovie], CustomError>) in
+                            switch response {
+                                case .success(let movies):
+                                    self.movies = movies
+                                    self.state = .error
+                                    self.error = CustomError.loadedFromStorage
+                                case .failure:
+                                    self.error = error
+                                    self.state = .error
+                            }
+                        }
                 }
             }
         }
@@ -46,5 +56,14 @@ class PopularMovieListViewModel: ObservableObject {
         let generator = UIImpactFeedbackGenerator(style: .heavy)
         generator.impactOccurred()
         movies?.reverse()
+    }
+
+    func errorButtonAction() {
+        if error == .loadedFromStorage {
+            state = .loaded
+            error = nil
+        } else {
+            fatalError()
+        }
     }
 }

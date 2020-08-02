@@ -54,6 +54,14 @@ struct DetailsModuleView: View {
                         Text(self.movieDetails.releaseDate)
                             .font(.subheadline)
                             .fontWeight(.thin)
+                        VStack(alignment: .leading) {
+                            Text("Adults:")
+                                .font(.headline)
+                                .fontWeight(.light)
+                            Text(self.movieDetails.adult ? "Yes" : "No")
+                                .font(.subheadline)
+                                .fontWeight(.thin)
+                        }
                     }
                 }
             }

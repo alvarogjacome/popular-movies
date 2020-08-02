@@ -35,7 +35,7 @@ struct PopularMoviesListScreen: View {
                         .zIndex(1)
 
                 } else if self.viewModel.state == .error {
-                    CustomPopup(message: self.viewModel.error!.rawValue, action: { fatalError() })
+                    CustomPopup(message: self.viewModel.error!.rawValue, action: self.viewModel.errorButtonAction)
                         .zIndex(1)
                 }
 
@@ -64,7 +64,3 @@ struct PopularMoviesListScreen: View {
         .accentColor(Color("LightGreen"))
     }
 }
-
-
-
-

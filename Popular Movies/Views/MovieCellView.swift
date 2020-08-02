@@ -21,7 +21,7 @@ struct MovieCellView: View {
                         HStack(alignment: .center) {
                             Text(movie.title)
                                 .font(.headline)
-                                .fontWeight(.light)
+                                .fontWeight(.medium)
                             Spacer()
                             Text(String(format: "%.1f", movie.voteAverage))
                                 .font(.subheadline)
@@ -34,10 +34,10 @@ struct MovieCellView: View {
                         .layoutPriority(1)
                         Text(movie.overview)
                             .font(.caption)
-                            .fontWeight(.light)
+                            .fontWeight(.thin)
                         Text("Release: \(movie.releaseDate)")
                             .font(.caption)
-                            .fontWeight(.light)
+                            .fontWeight(.thin)
                     }
                     .padding(.leading, geometry.size.width * 0.4)
                     .padding([.vertical, .trailing])
