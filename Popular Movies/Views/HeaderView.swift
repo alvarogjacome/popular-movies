@@ -16,13 +16,13 @@ struct HeaderView: View {
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            CustomImageView(url: URL(string: "https://image.tmdb.org/t/p/w500\(movie.backdropPath!)")!, placeholder: Image("BackdropPlaceholder").resizable())
+            MovieImageView(path: movie.backdropPath!, placeholder: Image("BackdropPlaceholder"), loadingView: LoadingView(geometry: geometry))
                 .scaledToFill()
                 .frame(width: geometry.size.width, height: geometry.size.width * 0.65)
                 .overlay(Color("MainBlue").opacity(0.6))
                 .clipped()
 
-            CustomImageView(url: URL(string: "https://image.tmdb.org/t/p/w500\(movie.posterPath!)")!, placeholder: LoadingView(geometry: geometry))
+            MovieImageView(path: movie.posterPath!, placeholder: Image("PosterPlaceholder").resizable(), loadingView: LoadingView(geometry: geometry))
                 .scaledToFill()
                 .frame(width: geometry.size.width * 0.33, height: geometry.size.width * 0.48)
                 .clipped()

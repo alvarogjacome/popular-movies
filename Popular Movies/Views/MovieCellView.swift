@@ -45,7 +45,7 @@ struct MovieCellView: View {
                 .background(Color(.systemBackground))
                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
 
-                CustomImageView(url: URL(string: "https://image.tmdb.org/t/p/w500\(movie.posterPath!)")!, placeholder: LoadingView(geometry: geometry))
+                MovieImageView(path: movie.posterPath!, placeholder: Image("PosterPlaceholder").resizable(), loadingView: LoadingView(geometry: geometry))
                     .scaledToFill()
                     .frame(width: geometry.size.width * 0.33, height: geometry.size.width * 0.48)
                     .background(Color("MainBlue"))

@@ -9,28 +9,42 @@
 import Combine
 import SwiftUI
 
-class ImageLoader: ObservableObject {
-    @Published var image: UIImage?
-    private let url: URL
-    private var cancellable: AnyCancellable?
+class ImageLoader {
+    static let shared = ImageLoader()
+    private let cache = NSCache<NSString, UIImage>()
 
-    init(url: URL) {
-        self.url = url
-    }
+    func fetchMovieImage(from path: String, completion: @escaping (Result<Image, CustomError>) -> Void) {
+        guard let url = URL(string: "https://image.tmdb.org/t/p/w500\(path)") else { return }
+        let path = NSString(string: path)
 
-    deinit {
-        cancellable?.cancel()
-    }
+        if let cachedImage = cache.object(forKey: path) {
+            completion(.success(Image(uiImage: cachedImage)))
+            return
+        }
 
-    func load() {
-        cancellable = URLSession.shared.dataTaskPublisher(for: url)
-            .map { UIImage(data: $0.data) }
-            .replaceError(with: nil)
-            .receive(on: DispatchQueue.main)
-            .assign(to: \.image, on: self)
-    }
+        URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
+            if let _ = error {
+                completion(.failure(.unableToComplete))
+                return
+            }
 
-    func cancel() {
-        cancellable?.cancel()
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completion(.failure(.invalidResponse))
+                return
+            }
+
+            guard let data = data else {
+                completion(.failure(.invalidData))
+                return
+            }
+
+            guard let image = UIImage(data: data) else {
+                completion(.failure(.unableToConvertToImage))
+                return
+            }
+            self.cache.setObject(image, forKey: path)
+            completion(.success(Image(uiImage: image)))
+        })
+            .resume()
     }
 }
