@@ -5,6 +5,8 @@
 ![Swift 5.0+](https://img.shields.io/badge/Swift-5.0%2B-orange)
 ![SwiftUI](https://img.shields.io/badge/UIFramework-SwiftUI-blue)
 
+![PopularMovies](Screenshots/screenshots.png)
+
 ## Requirements
 
 - iOS 13.1+
@@ -23,4 +25,4 @@ https://dribbble.com/shots/9017531-Movie-app-collection
 
 ## API
 
-The app uses [TMDB](https://developers.themoviedb.org/3/ )API
+The app uses [TMDB](https://developers.themoviedb.org/3/ ) API
