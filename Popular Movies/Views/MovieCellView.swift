@@ -9,13 +9,10 @@
 import SwiftUI
 
 struct MovieCellView: View {
-    @State private var image = Image("PosterPlaceholder")
-    @State private var isLoadingImage: Bool = true
-
     let movie: PopularMovie
     let geometry: GeometryProxy
     var body: some View {
-        NavigationLink(destination: MovieDetailScreen(moviePoster: image, movie: movie).navigationBarTitle(self.movie.title)
+        NavigationLink(destination: MovieDetailScreen(movie: movie).navigationBarTitle(self.movie.title)
             .navigationBarHidden(true)) {
             ZStack(alignment: .bottomLeading) {
                 HStack(alignment: .center) {
@@ -48,38 +45,18 @@ struct MovieCellView: View {
                 .background(Color(.systemBackground))
                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
 
-                ZStack {
-                    self.image
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: geometry.size.width * 0.33, height: geometry.size.width * 0.48)
-                        .background(Color("MainBlue"))
-                        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-                        .overlay(RoundedRectangle(cornerRadius: 12, style: .continuous)
-                            .stroke(LinearGradient(gradient: Gradient(colors: [Color("LightGreen"), Color("LightBlue")]), startPoint: .bottom, endPoint: .top), lineWidth: 0.5).opacity(0.8))
-                        .padding()
-                        .animation(.none)
-
-                    if isLoadingImage {
-                        LoadingView(geometry: geometry)
-                            .scaledToFill()
-                            .frame(width: geometry.size.width * 0.33, height: geometry.size.width * 0.48)
-                            .background(Color("MainBlue"))
-                            .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
-                            .overlay(RoundedRectangle(cornerRadius: 12, style: .continuous)
-                                .stroke(LinearGradient(gradient: Gradient(colors: [Color("LightGreen"), Color("LightBlue")]), startPoint: .bottom, endPoint: .top), lineWidth: 0.5).opacity(0.8))
-                            .padding()
-                    }
-                }
+                CustomImageView(url: URL(string: "https://image.tmdb.org/t/p/w500\(movie.posterPath!)")!, placeholder: LoadingView(geometry: geometry))
+                    .scaledToFill()
+                    .frame(width: geometry.size.width * 0.33, height: geometry.size.width * 0.48)
+                    .background(Color("MainBlue"))
+                    .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                    .overlay(RoundedRectangle(cornerRadius: 12, style: .continuous)
+                        .stroke(LinearGradient(gradient: Gradient(colors: [Color("LightGreen"), Color("LightBlue")]), startPoint: .bottom, endPoint: .top), lineWidth: 0.5).opacity(0.8))
+                    .padding()
+                    .zIndex(1)
             }
             .frame(width: geometry.size.width * 0.9)
             .shadow(radius: 10, x: 5, y: 5)
-            .onAppear(perform: {
-                NetworkManager.shared.fetchMovieImage(from: self.movie.posterPath, completionHandler: { image in
-                    self.image = image
-                    self.isLoadingImage = false
-                })
-        })
         }
         .buttonStyle(PlainButtonStyle())
     }

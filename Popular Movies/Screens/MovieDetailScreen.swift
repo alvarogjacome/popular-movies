@@ -11,13 +11,12 @@ import SwiftUI
 struct MovieDetailScreen: View {
     @State private var movieDetails: Movie?
 
-    let moviePoster: Image
     let movie: PopularMovie
 
     var body: some View {
         GeometryReader { geometry in
             VStack(spacing: 0) {
-                HeaderView(moviePoster: self.moviePoster, movie: self.movie, geometry: geometry)
+                HeaderView(movie: self.movie, geometry: geometry)
                 ScrollView(.vertical) {
                     if self.movieDetails != nil {
                         VStack {

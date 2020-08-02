@@ -20,6 +20,8 @@
 		CC29344A24D4A4860075AB29 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CC29344924D4A4860075AB29 /* Assets.xcassets */; };
 		CC29345024D4A4860075AB29 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CC29344E24D4A4860075AB29 /* LaunchScreen.storyboard */; };
 		CC29345B24D4A4860075AB29 /* Popular_MoviesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC29345A24D4A4860075AB29 /* Popular_MoviesTests.swift */; };
+		CC720D5C24D6F094002FD8BD /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC720D5B24D6F094002FD8BD /* ImageLoader.swift */; };
+		CC720D5E24D6F0BE002FD8BD /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC720D5D24D6F0BE002FD8BD /* CustomImageView.swift */; };
 		CC901DF924D4A76900DD2BDE /* Readme.md in Resources */ = {isa = PBXBuildFile; fileRef = CC901DF824D4A76900DD2BDE /* Readme.md */; };
 		CC901DFC24D4AAB600DD2BDE /* PopularMoviesList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC901DFB24D4AAB600DD2BDE /* PopularMoviesList.swift */; };
 		CC901DFE24D4ACF500DD2BDE /* PopularMovie.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC901DFD24D4ACF500DD2BDE /* PopularMovie.swift */; };
@@ -61,6 +63,8 @@
 		CC29345624D4A4860075AB29 /* Popular MoviesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Popular MoviesTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		CC29345A24D4A4860075AB29 /* Popular_MoviesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Popular_MoviesTests.swift; sourceTree = "<group>"; };
 		CC29345C24D4A4860075AB29 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		CC720D5B24D6F094002FD8BD /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
+		CC720D5D24D6F0BE002FD8BD /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		CC901DF824D4A76900DD2BDE /* Readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = Readme.md; sourceTree = "<group>"; };
 		CC901DFB24D4AAB600DD2BDE /* PopularMoviesList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMoviesList.swift; sourceTree = "<group>"; };
 		CC901DFD24D4ACF500DD2BDE /* PopularMovie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopularMovie.swift; sourceTree = "<group>"; };
@@ -183,6 +187,7 @@
 				CC2607BA24D5FBD0005D2AF9 /* MainModuleView.swift */,
 				CC2607BF24D6026D005D2AF9 /* SummaryModuleView.swift */,
 				CC2607C124D60326005D2AF9 /* DetailsModuleView.swift */,
+				CC720D5D24D6F0BE002FD8BD /* CustomImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -210,6 +215,7 @@
 			isa = PBXGroup;
 			children = (
 				CC901E0424D4CC8F00DD2BDE /* NetworkManager.swift */,
+				CC720D5B24D6F094002FD8BD /* ImageLoader.swift */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -330,6 +336,7 @@
 				CC29344624D4A4840075AB29 /* Popular_Movies.xcdatamodeld in Sources */,
 				CC901DFE24D4ACF500DD2BDE /* PopularMovie.swift in Sources */,
 				CC901E0C24D4E64100DD2BDE /* MovieCellView.swift in Sources */,
+				CC720D5E24D6F0BE002FD8BD /* CustomImageView.swift in Sources */,
 				CC901E0824D4CCC800DD2BDE /* CustomError.swift in Sources */,
 				CCBA20A624D5A9070015996E /* SearchBar.swift in Sources */,
 				CC2607C224D60326005D2AF9 /* DetailsModuleView.swift in Sources */,
@@ -337,6 +344,7 @@
 				CC2607BB24D5FBD0005D2AF9 /* MainModuleView.swift in Sources */,
 				CC29344824D4A4840075AB29 /* PopularMoviesListScreen.swift in Sources */,
 				CC29344324D4A4840075AB29 /* SceneDelegate.swift in Sources */,
+				CC720D5C24D6F094002FD8BD /* ImageLoader.swift in Sources */,
 				CC901E0E24D4E66E00DD2BDE /* Extension+View.swift in Sources */,
 				CC2607BE24D601B1005D2AF9 /* ModuleModifier.swift in Sources */,
 				CC2607C024D6026D005D2AF9 /* SummaryModuleView.swift in Sources */,

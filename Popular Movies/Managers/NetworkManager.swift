@@ -63,19 +63,4 @@ final class NetworkManager {
             }
         }
     }
-
-    func fetchMovieImage(from path: String?, completionHandler: @escaping (Image) -> Void) {
-        guard let path = path else { return }
-        guard let url = URL(string: "https://image.tmdb.org/t/p/w500\(path)") else { return }
-
-        URLSession.shared.dataTask(with: url, completionHandler: { data, response, error in
-            guard
-                error == nil,
-                let response = response as? HTTPURLResponse, response.statusCode == 200,
-                let data = data,
-                let image = UIImage(data: data)
-            else { return }
-            completionHandler(Image(uiImage: image))
-        }).resume()
-    }
 }

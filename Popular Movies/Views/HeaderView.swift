@@ -11,22 +11,18 @@ import SwiftUI
 struct HeaderView: View {
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
 
-    @State private var backdropImage = Image("BackdropPlaceholder")
-    let moviePoster: Image
     let movie: PopularMovie
     let geometry: GeometryProxy
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            self.backdropImage
-                .resizable()
+            CustomImageView(url: URL(string: "https://image.tmdb.org/t/p/w500\(movie.backdropPath!)")!, placeholder: Image("BackdropPlaceholder").resizable())
                 .scaledToFill()
                 .frame(width: geometry.size.width, height: geometry.size.width * 0.65)
                 .overlay(Color("MainBlue").opacity(0.6))
                 .clipped()
 
-            self.moviePoster
-                .resizable()
+            CustomImageView(url: URL(string: "https://image.tmdb.org/t/p/w500\(movie.posterPath!)")!, placeholder: LoadingView(geometry: geometry))
                 .scaledToFill()
                 .frame(width: geometry.size.width * 0.33, height: geometry.size.width * 0.48)
                 .clipped()
@@ -55,10 +51,5 @@ struct HeaderView: View {
         .frame(width: geometry.size.width, height: geometry.size.width * 0.65)
         .padding(.bottom, 4)
         .background(LinearGradient(gradient: Gradient(colors: [Color("LightGreen"), Color("LightBlue")]), startPoint: .leading, endPoint: .trailing))
-        .onAppear {
-            NetworkManager.shared.fetchMovieImage(from: self.movie.backdropPath, completionHandler: { image in
-                self.backdropImage = image
-            })
-        }
     }
 }
