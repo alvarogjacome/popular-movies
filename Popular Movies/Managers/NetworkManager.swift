@@ -44,7 +44,9 @@ final class NetworkManager {
     }
 
     func fetchPopularMovies(with page: Int? = 1, completionHandler: @escaping (Result<[PopularMovie], CustomError>) -> Void) {
-        fetch(from: URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=e1f6c97b51057579112740327d618edc")!) { (response: Result<PopularMoviesList, CustomError>) in
+        guard let url = URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=e1f6c97b51057579112740327d618edc") else { return }
+
+        fetch(from: url) { (response: Result<PopularMoviesList, CustomError>) in
             switch response {
                 case .failure(let error):
                     completionHandler(.failure(error))
@@ -55,7 +57,9 @@ final class NetworkManager {
     }
 
     func fetchMovieDetails(with id: Int, completionHandler: @escaping (Result<Movie, CustomError>) -> Void) {
-        fetch(from: URL(string: "https://api.themoviedb.org/3/movie/\(id)?api_key=e1f6c97b51057579112740327d618edc")!) { (response: Result<Movie, CustomError>) in
+        guard let url = URL(string: "https://api.themoviedb.org/3/movie/\(id)?api_key=e1f6c97b51057579112740327d618edc") else { return }
+
+        fetch(from: url) { (response: Result<Movie, CustomError>) in
             switch response {
                 case .failure(let error):
                     completionHandler(.failure(error))
