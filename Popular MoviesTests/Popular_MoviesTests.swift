@@ -11,18 +11,9 @@ import SwiftUI
 import XCTest
 
 class Popular_MoviesTests: XCTestCase {
-    var networkManager: NetworkManager!
-    var imageLoader: ImageLoader!
+    let networkManager: NetworkManager = NetworkManager.shared
+    let imageLoader: ImageLoader = ImageLoader.shared
 
-    override func setUpWithError() throws {
-        networkManager = NetworkManager.shared
-        imageLoader = ImageLoader.shared
-    }
-
-    override func tearDownWithError() throws {
-        networkManager = nil
-        imageLoader = nil
-    }
 
     func test_fetch_popular_movies_success() {
         let moviesExpectation = expectation(description: "popularMovies")
