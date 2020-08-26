@@ -14,15 +14,15 @@ class Popular_MoviesTests: XCTestCase {
     var networkManager: NetworkManager!
     var imageLoader: ImageLoader!
 
-//    override func setUpWithError() throws {
-//        networkManager = NetworkManager.shared
-//        imageLoader = ImageLoader.shared
-//    }
-//
-//    override func tearDownWithError() throws {
-//        networkManager = nil
-//        imageLoader = nil
-//    }
+    override func setUpWithError() throws {
+        networkManager = NetworkManager.shared
+        imageLoader = ImageLoader.shared
+    }
+
+    override func tearDownWithError() throws {
+        networkManager = nil
+        imageLoader = nil
+    }
 
     func test_fetch_popular_movies_success() {
         let moviesExpectation = expectation(description: "popularMovies")
