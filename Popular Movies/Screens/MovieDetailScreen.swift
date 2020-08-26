@@ -11,6 +11,7 @@ import SwiftUI
 struct MovieDetailScreen: View {
     @ObservedObject var viewModel: DetailScreenViewModel
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
+    @GestureState private var dragOffset = CGSize.zero
 
     var body: some View {
         GeometryReader { geometry in
@@ -44,7 +45,25 @@ struct MovieDetailScreen: View {
         .background(Color(.secondarySystemBackground))
         .edgesIgnoringSafeArea(.vertical)
         .navigationBarTitle("")
-        .navigationBarHidden(true)
+        .navigationBarHidden(false)
+        .navigationBarItems(leading: SFSymbols.arrowLeft
+            .resizable()
+            .scaleEffect(1.4)
+            .foregroundColor(Color(.secondarySystemBackground))
+            .padding(8)
+            .background(LinearGradient(gradient: Gradient(colors: [Colors.lightBlue, Colors.lightGreen, Colors.lightGreen]), startPoint: .bottomLeading, endPoint: .topTrailing))
+            .clipShape(Circle())
+            .clipped()
+            .onTapGesture {
+                let generator = UIImpactFeedbackGenerator(style: .soft)
+                self.presentationMode.wrappedValue.dismiss()
+                generator.impactOccurred()
+            })
         .onAppear(perform: self.viewModel.fetchMovieDetails)
+        .gesture(DragGesture().updating($dragOffset, body: { value, _, _ in
+            if value.startLocation.x < 25, value.translation.width > 50 {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+            }))
     }
 }

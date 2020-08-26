@@ -11,20 +11,7 @@ import SwiftUI
 struct PopularMoviesListScreen: View {
     @ObservedObject var viewModel = PopularMovieListViewModel()
     @State private var isSearching: Bool = false
-
-    init() {
-        let appearance = UINavigationBarAppearance()
-        appearance.backgroundColor = UIColors.mainBlue
-        appearance.shadowColor = .clear
-
-        appearance.titleTextAttributes = [
-            .font: UIFont.systemFont(ofSize: 22, weight: .thin),
-            NSAttributedString.Key.foregroundColor: UIColor.white
-        ]
-
-        UINavigationBar.appearance().standardAppearance = appearance
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
-    }
+    @State private var showingFilters: Bool = false
 
     var body: some View {
         GeometryReader { geometry in
@@ -43,8 +30,8 @@ struct PopularMoviesListScreen: View {
                     VStack(alignment: .leading, spacing: 0) {
                         SearchBar(search: self.$viewModel.search, isSearching: self.$isSearching)
 
-                        if self.viewModel.state == .loaded {
-                            MoviesListView(movieList: self.viewModel.getMovies()!, geometry: geometry)
+                        if self.viewModel.movies?.isEmpty != nil {
+                            MoviesListView(movieList: self.viewModel.getMovies()!, canLoadMoreMovies: self.$viewModel.canLoadMoreMovies, action: self.viewModel.fetchMorePopularMovies, geometry: geometry)
                         } else {
                             Spacer()
                         }
@@ -52,8 +39,13 @@ struct PopularMoviesListScreen: View {
                     .navigationBarItems(leading: self.navigationBarLogo("logo"), trailing:
                         ReorderButton(action: self.viewModel.reorderButtonAction))
                     .navigationBarTitle("", displayMode: .inline)
-                    .background(Color(.tertiarySystemBackground))
                     .edgesIgnoringSafeArea([.horizontal, .bottom])
+                    .background(NavigationConfigurator { nc in
+                        nc.navigationBar.setBackgroundImage(UIImage(), for: .default)
+                        nc.navigationBar.shadowImage = UIImage()
+                        nc.navigationBar.isTranslucent = true
+                        nc.view.backgroundColor = .clear
+                        })
                     .onTapGesture {
                         self.hideKeyboard()
                     }

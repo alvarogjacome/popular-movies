@@ -12,9 +12,7 @@ struct MovieCellView: View {
     let movie: PopularMovie
     let geometry: GeometryProxy
     var body: some View {
-        NavigationLink(destination: MovieDetailScreen(viewModel: DetailScreenViewModel(wid: movie))
-            .navigationBarTitle("")
-            .navigationBarHidden(true)) {
+        NavigationLink(destination: MovieDetailScreen(viewModel: DetailScreenViewModel(wid: movie))) {
             ZStack(alignment: .bottomLeading) {
                 HStack(alignment: .center) {
                     VStack(alignment: .leading, spacing: 10) {
@@ -46,7 +44,7 @@ struct MovieCellView: View {
                 .background(Color(.systemBackground))
                 .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
 
-                MovieImageView(path: movie.posterPath!, placeholder: Images.posterPlaceholder.resizable(), loadingView: LoadingView(geometry: geometry))
+                MovieImageView(path: movie.posterPath, placeholder: Images.posterPlaceholder.resizable(), loadingView: LoadingView(geometry: geometry))
                     .scaledToFill()
                     .frame(width: geometry.size.width * 0.33, height: geometry.size.width * 0.48)
                     .background(Colors.mainBlue)

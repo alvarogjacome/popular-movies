@@ -9,8 +9,6 @@
 import SwiftUI
 
 struct HeaderView: View {
-    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
-
     let movie: PopularMovie
     let geometry: GeometryProxy
 
@@ -32,21 +30,6 @@ struct HeaderView: View {
                     .stroke(LinearGradient(gradient: Gradient(colors: [Colors.lightGreen, Colors.lightBlue]), startPoint: .bottom, endPoint: .top), lineWidth: 0.5).opacity(0.8))
                 .padding()
                 .shadow(color: Colors.lightGreen.opacity(0.4), radius: 20)
-
-            SFSymbols.arrowLeft
-                .resizable()
-                .foregroundColor(Color(.secondarySystemBackground))
-                .padding(2)
-                .background(LinearGradient(gradient: Gradient(colors: [Colors.lightBlue, Colors.lightGreen, Colors.lightGreen]), startPoint: .bottomLeading, endPoint: .topTrailing))
-                .clipShape(Circle())
-                .frame(width: geometry.size.width * 0.08, height: geometry.size.width * 0.08)
-                .clipped()
-                .offset(x: -geometry.size.width / 2.5, y: -geometry.size.width / 2.3)
-                .onTapGesture {
-                    let generator = UIImpactFeedbackGenerator(style: .soft)
-                    self.presentationMode.wrappedValue.dismiss()
-                    generator.impactOccurred()
-                }.zIndex(1)
         }
         .frame(width: geometry.size.width, height: geometry.size.width * 0.65)
         .padding(.bottom, 4)

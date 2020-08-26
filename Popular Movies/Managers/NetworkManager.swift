@@ -43,8 +43,8 @@ final class NetworkManager {
         .resume()
     }
 
-    func fetchPopularMovies(with page: Int? = 1, completionHandler: @escaping (Result<[PopularMovie], CustomError>) -> Void) {
-        guard let url = URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=e1f6c97b51057579112740327d618edc") else { return }
+    func fetchPopularMovies(with page: Int = 1, completionHandler: @escaping (Result<[PopularMovie], CustomError>) -> Void) {
+        guard let url = URL(string: "https://api.themoviedb.org/3/movie/popular?api_key=e1f6c97b51057579112740327d618edc&page=\(page)") else { return }
 
         fetch(from: url) { (response: Result<PopularMoviesList, CustomError>) in
             switch response {

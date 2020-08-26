@@ -13,9 +13,9 @@ struct MovieImageView<LoadingView: View>: View {
     @State private var loadingCompleted = false
     private let placeholder: Image
     private let loadingView: LoadingView
-    private let path: String
+    private let path: String?
 
-    init(path: String, placeholder: Image, loadingView: LoadingView) {
+    init(path: String?, placeholder: Image, loadingView: LoadingView) {
         self.path = path
         self.placeholder = placeholder
         self.loadingView = loadingView

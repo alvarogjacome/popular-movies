@@ -10,21 +10,35 @@ import SwiftUI
 
 struct MoviesListView: View {
     let movieList: [PopularMovie]
+    @Binding var canLoadMoreMovies: Bool
+    let action: () -> Void
     let geometry: GeometryProxy
 
     var body: some View {
         ScrollView(.vertical) {
-            VStack(alignment: .center, spacing: 10) {
-                ForEach(movieList
+            ForEach(movieList
 
-                ) { movie in
-                    MovieCellView(movie: movie, geometry: self.geometry)
-                        .fixedSize(horizontal: false, vertical: true)
-                }
+            ) { movie in
+                MovieCellView(movie: movie, geometry: self.geometry)
+                    .fixedSize(horizontal: false, vertical: true)
             }
-            .padding(.bottom)
             .frame(width: ScreenSize.width)
             .animation(.spring())
+
+            if canLoadMoreMovies {
+                Button(action: action) {
+                    Text("More")
+                        .font(.headline)
+                        .fontWeight(.light)
+                        .foregroundColor(Color(.systemBackground))
+                        .padding(.vertical, 15)
+                        .padding(.horizontal, 40)
+                }
+                .background(LinearGradient(gradient: Gradient(colors: [Colors.lightGreen, Colors.lightBlue]), startPoint: .leading, endPoint: .trailing))
+                .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+                .padding(.vertical)
+            }
         }
+        .padding(.bottom, 30)
     }
 }

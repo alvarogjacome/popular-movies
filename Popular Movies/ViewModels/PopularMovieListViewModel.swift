@@ -16,19 +16,24 @@ class PopularMovieListViewModel: ObservableObject {
     @Published private(set) var state: LoadingState = .loading
     @Published private(set) var error: CustomError? = nil
     @Published var search: String = ""
+    @Published var canLoadMoreMovies: Bool = false
+
+    private var currentPage = 1
+    private let maxPage = 10
 
     init() {
-        fetchMovieDetails()
+        fetchPopularMovies()
     }
 
-    private func fetchMovieDetails() {
-        NetworkManager.shared.fetchPopularMovies { (response: Result<[PopularMovie], CustomError>) in
+    private func fetchPopularMovies() {
+        NetworkManager.shared.fetchPopularMovies { [unowned self] (response: Result<[PopularMovie], CustomError>) in
             DispatchQueue.main.async {
                 switch response {
                     case .success(let movies):
-                        PersistenceManager.updateWith(movies: movies)
                         self.movies = movies
+                        self.canLoadMoreMovies = self.canLoadMorePages()
                         self.state = .loaded
+                        PersistenceManager.updateWith(movies: self.movies!)
                     case .failure(let error):
                         self.fetchLocalStoredMovies(error: error)
                 }
@@ -36,8 +41,36 @@ class PopularMovieListViewModel: ObservableObject {
         }
     }
 
+    func fetchMorePopularMovies() {
+        DispatchQueue.main.async {
+            if self.canLoadMorePages() {
+                self.currentPage += 1
+                self.state = .loading
+                NetworkManager.shared.fetchPopularMovies(with: self.currentPage) { [unowned self] (response: Result<[PopularMovie], CustomError>) in
+                    DispatchQueue.main.async {
+                        switch response {
+                            case .success(let movies):
+                                self.movies?.append(contentsOf: movies)
+                                self.canLoadMoreMovies = self.canLoadMorePages()
+                                self.state = .loaded
+                                PersistenceManager.updateWith(movies: self.movies!)
+                            case .failure(let error):
+                                self.error = error
+                                self.canLoadMoreMovies = false
+                                self.state = .error
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    private func canLoadMorePages() -> Bool {
+        return currentPage < maxPage
+    }
+
     private func fetchLocalStoredMovies(error: CustomError) {
-        PersistenceManager.retrievePopuplarMovies { (response: Result<[PopularMovie], CustomError>) in
+        PersistenceManager.retrievePopuplarMovies { [unowned self] (response: Result<[PopularMovie], CustomError>) in
             switch response {
                 case .success(let movies):
                     self.movies = movies
@@ -50,6 +83,12 @@ class PopularMovieListViewModel: ObservableObject {
         }
     }
 
+    private func sortedByPopularity(_ movies: [PopularMovie]) -> [PopularMovie] {
+        movies.sorted(by: {
+            $0.popularity > $1.popularity
+        })
+    }
+
     func getMovies() -> [PopularMovie]? {
         return movies?.filter {
             $0.title.lowercased().contains(self.search.lowercased()) || self.search.isEmpty
@@ -57,13 +96,13 @@ class PopularMovieListViewModel: ObservableObject {
     }
 
     func reorderButtonAction() {
-        let generator = UIImpactFeedbackGenerator(style: .heavy)
-        generator.impactOccurred()
-        movies?.reverse()
+//        let generator = UIImpactFeedbackGenerator(style: .heavy)
+//        generator.impactOccurred()
+//        movies?.reverse()
     }
 
     func errorButtonAction() {
-        if error == .loadedFromStorage {
+        if error == .loadedFromStorage || currentPage > 1 {
             state = .loaded
             error = nil
         } else {

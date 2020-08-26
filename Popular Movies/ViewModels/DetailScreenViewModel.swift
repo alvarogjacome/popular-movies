@@ -25,7 +25,7 @@ class DetailScreenViewModel: ObservableObject {
     }
 
     func fetchMovieDetails() {
-        NetworkManager.shared.fetchMovieDetails(with: popularMovie.id) { (response: Result<Movie, CustomError>) in
+        NetworkManager.shared.fetchMovieDetails(with: popularMovie.id) { [unowned self] (response: Result<Movie, CustomError>) in
             DispatchQueue.main.async {
                 switch response {
                     case .success(let movie):

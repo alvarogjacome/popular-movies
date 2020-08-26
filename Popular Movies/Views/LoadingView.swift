@@ -43,7 +43,6 @@ private struct BigColumn: View {
                 .frame(width: geometry.size.height * 0.015, height: geometry.size.height * 0.030)
                 .scaleEffect(shouldAnimate ? 2 : 1)
         }
-        .shadow(color: .black, radius: 5)
     }
 }
 
@@ -58,6 +57,5 @@ private struct LittleColumn: View {
                 .frame(width: geometry.size.height * 0.015, height: geometry.size.height * 0.030)
                 .scaleEffect(shouldAnimate ? 1 : 2)
         }
-        .shadow(color: .black, radius: 5)
     }
 }

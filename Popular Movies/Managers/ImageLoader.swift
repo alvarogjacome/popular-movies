@@ -13,11 +13,18 @@ class ImageLoader {
     static let shared = ImageLoader()
     private let cache = NSCache<NSString, UIImage>()
 
-    func fetchMovieImage(from path: String, completion: @escaping (Result<Image, CustomError>) -> Void) {
-        guard let url = URL(string: "https://image.tmdb.org/t/p/w500\(path)") else { return }
-        let path = NSString(string: path)
+    func fetchMovieImage(from path: String?, completion: @escaping (Result<Image, CustomError>) -> Void) {
+        guard let path = path else {
+            completion(.failure(CustomError.invalidRequest))
+            return
+        }
+        guard let url = URL(string: "https://image.tmdb.org/t/p/w500\(path)") else {
+            completion(.failure(CustomError.invalidRequest))
+            return
+        }
+        let NSPath = NSString(string: path)
 
-        if let cachedImage = cache.object(forKey: path) {
+        if let cachedImage = cache.object(forKey: NSPath) {
             completion(.success(Image(uiImage: cachedImage)))
             return
         }
@@ -42,7 +49,7 @@ class ImageLoader {
                 completion(.failure(.unableToConvertToImage))
                 return
             }
-            self.cache.setObject(image, forKey: path)
+            self.cache.setObject(image, forKey: NSPath)
             completion(.success(Image(uiImage: image)))
         })
             .resume()
