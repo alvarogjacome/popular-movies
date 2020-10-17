@@ -95,12 +95,6 @@ class PopularMovieListViewModel: ObservableObject {
         }
     }
 
-    func reorderButtonAction() {
-//        let generator = UIImpactFeedbackGenerator(style: .heavy)
-//        generator.impactOccurred()
-//        movies?.reverse()
-    }
-
     func errorButtonAction() {
         if error == .loadedFromStorage || currentPage > 1 {
             state = .loaded

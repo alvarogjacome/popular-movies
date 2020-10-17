@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MoviesListView: View {
     let movieList: [PopularMovie]
-    @Binding var canLoadMoreMovies: Bool
+    var canLoadMoreMovies: Bool
     let action: () -> Void
     let geometry: GeometryProxy
 

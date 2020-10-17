@@ -46,6 +46,7 @@ struct MovieDetailScreen: View {
         .edgesIgnoringSafeArea(.vertical)
         .navigationBarTitle("")
         .navigationBarHidden(false)
+        .navigationBarBackButtonHidden(true)
         .navigationBarItems(leading: SFSymbols.arrowLeft
             .resizable()
             .scaleEffect(1.4)

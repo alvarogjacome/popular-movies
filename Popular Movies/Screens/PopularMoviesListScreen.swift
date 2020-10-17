@@ -13,6 +13,12 @@ struct PopularMoviesListScreen: View {
     @State private var isSearching: Bool = false
     @State private var showingFilters: Bool = false
 
+    init() {
+        UINavigationBar.appearance().barTintColor = .clear
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
+        UINavigationBar.appearance().shadowImage = UIImage()
+    }
+
     var body: some View {
         GeometryReader { geometry in
             ZStack {
@@ -31,21 +37,14 @@ struct PopularMoviesListScreen: View {
                         SearchBar(search: self.$viewModel.search, isSearching: self.$isSearching)
 
                         if self.viewModel.movies?.isEmpty != nil {
-                            MoviesListView(movieList: self.viewModel.getMovies()!, canLoadMoreMovies: self.$viewModel.canLoadMoreMovies, action: self.viewModel.fetchMorePopularMovies, geometry: geometry)
+                            MoviesListView(movieList: self.viewModel.getMovies()!, canLoadMoreMovies: self.$viewModel.canLoadMoreMovies.wrappedValue && !self.$isSearching.wrappedValue, action: self.viewModel.fetchMorePopularMovies, geometry: geometry)
                         } else {
                             Spacer()
                         }
                     }
-                    .navigationBarItems(leading: self.navigationBarLogo("logo"), trailing:
-                        ReorderButton(action: self.viewModel.reorderButtonAction))
+                    .navigationBarItems(leading: self.navigationBarLogo("logo"))
                     .navigationBarTitle("", displayMode: .inline)
                     .edgesIgnoringSafeArea([.horizontal, .bottom])
-                    .background(NavigationConfigurator { nc in
-                        nc.navigationBar.setBackgroundImage(UIImage(), for: .default)
-                        nc.navigationBar.shadowImage = UIImage()
-                        nc.navigationBar.isTranslucent = true
-                        nc.view.backgroundColor = .clear
-                        })
                     .onTapGesture {
                         self.hideKeyboard()
                     }
